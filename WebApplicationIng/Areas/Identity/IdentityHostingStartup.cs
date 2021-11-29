@@ -15,14 +15,18 @@ namespace WebApplicationIng.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
-            builder.ConfigureServices((context, services) => {
+            builder.ConfigureServices((context, services) =>
+            {
                 services.AddDbContext<WebApplicationIngContext>(options =>
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("WebApplicationIngContextConnection")));
 
-                services.AddDefaultIdentity<WebApplicationIngUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                services.AddDefaultIdentity<WebApplicationIngUser>(options => options.SignIn.RequireConfirmedAccount = false).AddRoles<IdentityRole>()
+
                     .AddEntityFrameworkStores<WebApplicationIngContext>();
             });
+        
         }
     }
+
 }

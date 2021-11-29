@@ -45,7 +45,7 @@ namespace WebApplicationIng.Controllers
 
         // GET: Empleadoes/Create
 
-        [Authorize(Roles = "empleador")]
+        [Authorize(Roles ="empleado")]
         public IActionResult Create()
         {
             return View();
@@ -56,6 +56,7 @@ namespace WebApplicationIng.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> Create([Bind("Id,Nombre,Apellido,Cedula,Nacimiento,Direccion,Telefono,Puesto,Correo")] Empleado empleado)
         {
             if (ModelState.IsValid)
@@ -68,6 +69,7 @@ namespace WebApplicationIng.Controllers
         }
 
         // GET: Empleadoes/Edit/5
+        [Authorize(Roles = "empleado")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -119,6 +121,7 @@ namespace WebApplicationIng.Controllers
         }
 
         // GET: Empleadoes/Delete/5
+        [Authorize(Roles = "empleado")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
